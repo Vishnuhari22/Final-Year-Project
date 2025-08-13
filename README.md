@@ -1,4 +1,17 @@
-Real-Time Polyp Detection using YOLOv8This document provides a comprehensive guide to the object detection module of our final year project. The goal of this module is to train a state-of-the-art YOLOv8 model to detect colon polyps in real-time from colonoscopy images and videos.Workflow OverviewThe project follows a standard machine learning pipeline, which can be summarized in three main phases:Data Preparation: We start with the expert-annotated Kvasir-SEG dataset. We use Python scripts to automatically convert the provided segmentation masks into YOLO-compatible bounding box labels and then split the data into training and validation sets.Model Training: We leverage Google Colab's free GPU resources to train a YOLOv8 model on our prepared dataset. The entire training process is managed within a Colab notebook.Inference & Prediction: After training, we use the final trained model (best.pt) to run predictions on new, unseen colonoscopy videos to test its performance.Phase 1: Data PreparationThis phase is fully automated using two Python scripts. The goal is to convert the raw Kvasir-SEG dataset into the precise folder structure and label format that YOLO requires.1. Automated Label Generation (Mask to Bounding Box)We use the provided segmentation masks to automatically generate bounding box labels.converter.py Script:This script reads each mask, finds the polyp's outline, calculates the bounding box, and saves it as a .txt file.import os
+Real-Time Polyp Detection using YOLOv8
+This document provides a comprehensive guide to the object detection module of our final year project. The goal of this module is to train a state-of-the-art YOLOv8 model to detect colon polyps in real-time from colonoscopy images and videos.
+
+Workflow Overview
+The project follows a standard machine learning pipeline, which can be summarized in three main phases:
+Data Preparation: We start with the expert-annotated Kvasir-SEG dataset. We use Python scripts to automatically convert the provided segmentation masks into YOLO-compatible bounding box labels and then split the data into training and validation sets.
+Model Training: We leverage Google Colab's free GPU resources to train a YOLOv8 model on our prepared dataset. The entire training process is managed within a Colab notebook.
+Inference & Prediction: After training, we use the final trained model (best.pt) to run predictions on new, unseen colonoscopy videos to test its performance.
+
+Phase 1: Data PreparationThis phase is fully automated using two Python scripts. The goal is to convert the raw Kvasir-SEG dataset into the precise folder structure and label format that YOLO requires.
+1. Automated Label Generation (Mask to Bounding Box)
+We use the provided segmentation masks to automatically generate bounding box labels.converter.py Script:This script reads each mask, finds the polyp's outline, calculates the bounding box, and saves it as a .txt file.
+
+import os
 import cv2
 
 # --- CONFIGURATION ---
